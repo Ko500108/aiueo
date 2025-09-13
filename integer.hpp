@@ -1,65 +1,76 @@
-/// @ref gtc_integer
-/// @file glm/gtc/integer.hpp
+/// @ref gtx_integer
+/// @file glm/gtx/integer.hpp
 ///
 /// @see core (dependence)
-/// @see gtc_integer (dependence)
 ///
-/// @defgroup gtc_integer GLM_GTC_integer
-/// @ingroup gtc
+/// @defgroup gtx_integer GLM_GTX_integer
+/// @ingroup gtx
 ///
-/// Include <glm/gtc/integer.hpp> to use the features of this extension.
+/// Include <glm/gtx/integer.hpp> to use the features of this extension.
 ///
-/// @brief Allow to perform bit operations on integer values
+/// Add support for integer for core functions
 
 #pragma once
 
-// Dependencies
-#include "../detail/setup.hpp"
-#include "../detail/qualifier.hpp"
-#include "../common.hpp"
-#include "../integer.hpp"
-#include "../exponential.hpp"
-#include <limits>
+// Dependency:
+#include "../glm.hpp"
+#include "../gtc/integer.hpp"
+
+#ifndef GLM_ENABLE_EXPERIMENTAL
+#	error "GLM: GLM_GTX_integer is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
+#endif
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
-#	pragma message("GLM: GLM_GTC_integer extension included")
+#	pragma message("GLM: GLM_GTX_integer extension included")
 #endif
 
 namespace glm
 {
-	/// @addtogroup gtc_integer
+	/// @addtogroup gtx_integer
 	/// @{
 
-	/// Returns the log2 of x for integer values. Can be reliably using to compute mipmap count from the texture size.
-	/// @see gtc_integer
-	template<typename genIUType>
-	GLM_FUNC_DECL genIUType log2(genIUType x);
+	//! Returns x raised to the y power. 
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL int pow(int x, uint y);
 
-	/// Returns a value equal to the nearest integer to x.
-	/// The fraction 0.5 will round in a direction chosen by the
-	/// implementation, presumably the direction that is fastest.
-	/// 
-	/// @param x The values of the argument must be greater or equal to zero.
-	/// @tparam T floating point scalar types.
-	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/round.xml">GLSL round man page</a>
-	/// @see gtc_integer
-	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<L, int, Q> iround(vec<L, T, Q> const& x);
+	//! Returns the positive square root of x.
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL int sqrt(int x);
 
-	/// Returns a value equal to the nearest integer to x.
-	/// The fraction 0.5 will round in a direction chosen by the
-	/// implementation, presumably the direction that is fastest.
-	/// 
-	/// @param x The values of the argument must be greater or equal to zero.
-	/// @tparam T floating point scalar types.
-	/// 
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/round.xml">GLSL round man page</a>
-	/// @see gtc_integer
-	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<L, uint, Q> uround(vec<L, T, Q> const& x);
+	//! Returns the floor log2 of x.
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL unsigned int floor_log2(unsigned int x);
+
+	//! Modulus. Returns x - y * floor(x / y) for each component in x using the floating point value y.
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL int mod(int x, int y);
+
+	//! Return the factorial value of a number (!12 max, integer only)
+	//! From GLM_GTX_integer extension.
+	template<typename genType> 
+	GLM_FUNC_DECL genType factorial(genType const& x);
+
+	//! 32bit signed integer. 
+	//! From GLM_GTX_integer extension.
+	typedef signed int					sint;
+
+	//! Returns x raised to the y power.
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL uint pow(uint x, uint y);
+
+	//! Returns the positive square root of x. 
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL uint sqrt(uint x);
+
+	//! Modulus. Returns x - y * floor(x / y) for each component in x using the floating point value y.
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL uint mod(uint x, uint y);
+
+	//! Returns the number of leading zeros.
+	//! From GLM_GTX_integer extension.
+	GLM_FUNC_DECL uint nlz(uint x);
 
 	/// @}
-} //namespace glm
+}//namespace glm
 
 #include "integer.inl"
